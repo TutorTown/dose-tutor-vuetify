@@ -1,5 +1,7 @@
-import Step from './Step.js'
+import Step from './Step.js';
 
-export function Problem(config) {
-	this.mainStep = new Step(config.mainStep);
+export default class Problem {
+	constructor(config) {
+		this.mainStep = new Step(config.mainStep);
+	}
 }

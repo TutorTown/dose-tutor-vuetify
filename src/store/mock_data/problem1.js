@@ -118,4 +118,4 @@ const config = {
 	}
 };
 
-export const Problem1 = new Problem(config);
+export default new Problem(config);
