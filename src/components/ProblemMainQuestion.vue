@@ -44,4 +44,11 @@ export default {
 	position: relative;
 	justify-content: space-between;
 }
+.v-card__text {
+	text-align: left;
+}
+
+.answers_wrapper {
+	max-width: 30%;
+}
 </style>
