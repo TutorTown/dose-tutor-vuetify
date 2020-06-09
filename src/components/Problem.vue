@@ -5,6 +5,7 @@
 		<v-col>
 			<problem-main-question
 				:is-current-step="$store.getters.stepLevel === 0"
+				:is-main-question="true"
 				:prompt="prompt"
 				:submitted-answers="submittedAnswers"
 				@submit="handleSubmit($event)"
@@ -17,6 +18,7 @@
 	<problem-main-question
 		v-if="$store.getters.stepLevel > 0"
 		:is-current-step="true"
+		:is-main-question="false"
 		:prompt="$store.getters.currentStep.propmt"
 		:submitted-answers="submittedAnswers"
 	/>

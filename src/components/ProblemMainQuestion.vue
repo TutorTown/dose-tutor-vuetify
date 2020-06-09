@@ -1,7 +1,7 @@
 <template>
 	<div id="main_question_wrapper">
 		<v-card>
-			<v-card-title>Main Question</v-card-title>
+			<v-card-title>{{isMainQuestion ? 'Main Question' : 'Current Step'}}</v-card-title>
 
 			<v-card-text> {{ prompt }} </v-card-text>
 
@@ -35,7 +35,8 @@ export default {
 		prompt: String,
 		submittedAnswers: {
 			type: Array,
-		}
+		},
+		isMainQuestion: Boolean,
 	},
 	methods: {
 		breakIntoSteps() {
