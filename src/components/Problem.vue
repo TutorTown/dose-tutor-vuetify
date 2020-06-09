@@ -3,7 +3,7 @@
 	<v-row>
 		<!-- Main Problem Body -->
 		<v-col>
-			<problem-main-question
+			<problem-step
 				:is-current-step="$store.getters.stepLevel === 0"
 				:is-main-question="true"
 				:prompt="prompt"
@@ -15,7 +15,7 @@
 			BUTTS
 		</v-col>
 	</v-row>
-	<problem-main-question
+	<problem-step
 		v-if="$store.getters.stepLevel > 0"
 		:is-current-step="true"
 		:is-main-question="false"
@@ -27,12 +27,12 @@
 </template>
 
 <script type="text/javascript">
-import ProblemMainQuestion from './ProblemMainQuestion.vue'
+import ProblemStep from './ProblemStep.vue'
 
 export default {
 	name: 'Problem',
 	components: {
-		ProblemMainQuestion
+		ProblemStep,
 	},
 	props: {
 

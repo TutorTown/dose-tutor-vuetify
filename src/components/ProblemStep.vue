@@ -1,5 +1,5 @@
 <template>
-	<div id="main_question_wrapper">
+	<div id="step_wrapper">
 		<v-card>
 			<v-card-title>{{isMainQuestion ? 'Main Question' : 'Current Step'}}</v-card-title>
 
@@ -26,7 +26,7 @@
 import ProblemAnswers from './ProblemAnswers.vue';
 
 export default {
-	name: 'MainQuestion',
+	name: 'ProblemStep',
 	components: {
 		ProblemAnswers,
 	},
