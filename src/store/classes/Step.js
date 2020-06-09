@@ -31,7 +31,8 @@ export default class Step {
 					res.correct = true;
 					res.match = this.correctAnswer;
 					res.message = this.correctAnswer.message;
-					this.submittedAnswers.push(new Answer({value: guess, correct: true, message: res.message}));
+					// this.submittedAnswers.push(new Answer({value: guess, correct: true, message: res.message}));
+					this.submittedAnswers.push(this.correctAnswer);
 					this.complete = true;
 				// Check guess against common wrong answers
 				} else {
@@ -41,8 +42,8 @@ export default class Step {
 							res.message = answer.message;
 						}
 					});
-					// this.submittedAnswers.push(new Answer({value: guess, correct: false, message: res.message}));
-					this.submittedAnswers.push(this.correctAnswer);
+					this.submittedAnswers.push(new Answer({value: guess, correct: false, message: res.message}));
+
 				}
 			} else {
 				res.correct = true;
