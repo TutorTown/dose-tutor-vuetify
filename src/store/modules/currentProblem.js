@@ -71,10 +71,12 @@ export default {
 			// }
 		},
 		breakIntoSteps(context) {
-			if (context.getters.stepLevel === stepLevels.main) {
-				context.state.stepIndex = 0;
-			} else {
-				context.state.subStepIndex = 0;
+			if (!context.getters.currentStep.complete) {
+				if (context.getters.stepLevel === stepLevels.main) {
+					context.state.stepIndex = 0;
+				} else {
+					context.state.subStepIndex = 0;
+				}
 			}
 		}
 	},

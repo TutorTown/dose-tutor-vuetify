@@ -66,15 +66,19 @@ export default {
 			// this.$emit('submit', value);
 			this.$store.dispatch('submitAnswer', value)
 			.then((res) => {
+				this.ssnackColor = 'info';
 				if (res.error) {
 					this.snackText = res.error;
 					this.snackColor = 'error';
 					this.showSnackbar = true;
-				}
-				else if (res.message) {
-					this.snackColor = 'info';
-					this.snackText = res.message;
-					this.showSnackbar = true;
+				} else {
+					if (res.correct) {
+						this.snackColor = 'primary';
+					}
+					if (res.message) {
+						this.snackText = res.message;
+						this.showSnackbar = true;
+					}
 				}
 				this.currentAttempt = '';
 			});
