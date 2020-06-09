@@ -5,9 +5,11 @@
 
 			<v-card-text> {{ prompt }} </v-card-text>
 
-			<v-card-actions>
+			<v-card-actions v-if="isCurrentStep">
 				<v-btn
+					v-if="$store.getters.stepLevel < 2"
 					class="primary"
+					@click="breakIntoSteps"
 				>
 					BREAK INTO STEPS
 				</v-btn>
@@ -29,10 +31,16 @@ export default {
 		ProblemAnswers,
 	},
 	props: {
+		isCurrentStep: Boolean,
 		prompt: String,
 		submittedAnswers: {
 			type: Array,
 		}
+	},
+	methods: {
+		breakIntoSteps() {
+			this.$store.dispatch('breakIntoSteps');
+		},
 	}
 }
 </script>

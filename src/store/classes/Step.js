@@ -7,6 +7,7 @@ export default class Step {
 		this.correctAnswer = Object.prototype.hasOwnProperty.call(config, 'correctAnswer') ? new Answer(config.correctAnswer) : null;
 		this.submittedAnswers = [];
 		this.commonWrongAnswers = [];
+		this.complete = false; // Whether step has been completed
 		if (Object.prototype.hasOwnProperty.call('commonWrongAnswers', config)) {
 			config.commonWrongAnswers.forEach((answer) => this.commonWrongAnswers.push(new Answer(answer)));
 		}
@@ -18,29 +19,32 @@ export default class Step {
 
 		this.checkAnswer = function(guess) {
 			const res = {correct: false, match: null, message: '', error: null};
-			// Check if this answer was already submitted
-			const matchedAnswer = this.submittedAnswers.find((answer) => guess === answer.value);
-			if (matchedAnswer !== undefined) {
-				res.error = 'You already tried that answer';
+			// Only check answer if step is not yet correct
+			if (!this.complete) {
+				// Check if this answer was already submitted
+				const matchedAnswer = this.submittedAnswers.find((answer) => guess === answer.value);
+				if (matchedAnswer !== undefined) {
+					res.error = 'You already tried that answer';
+				}
+				// Check if answer is correct
+				else if (this.correctAnswer.isMatch(guess)) {
+					res.correct = true;
+					res.match = this.correctAnswer;
+					res.message = this.correctAnswer.message;
+					this.submittedAnswers.push(new Answer({value: guess, correct: true, message: res.message}));
+				// Check guess against common wrong answers
+				} else {
+					this.commonWrongAnswers.forEach((answer) => {
+						if (answer.isMatch(guess)) {
+							res.match = answer;
+							res.message = answer.message;
+						}
+					});
+					this.submittedAnswers.push(new Answer({value: guess, correct: false, message: res.message}));
+				}
+				return res;
 			}
-			// Check if answer is correct
-			else if (this.correctAnswer.isMatch(guess)) {
-				res.correct = true;
-				res.match = this.correctAnswer;
-				res.message = this.correctAnswer.message;
-				this.submittedAnswers.push(new Answer({value: guess, correct: true, message: res.message}));
-			// Check guess against common wrong answers
-			} else {
-				this.commonWrongAnswers.forEach((answer) => {
-					if (answer.isMatch(guess)) {
-						res.match = answer;
-						res.message = answer.message;
-					}
-				});
-				this.submittedAnswers.push(new Answer({value: guess, correct: false, message: res.message}));
-			}
-			return res;
-		}
+		} // End checkAnswer()
 
-	}
-}
+	} // End constructor()
+} // End class

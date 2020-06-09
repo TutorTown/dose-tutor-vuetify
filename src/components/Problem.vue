@@ -1,9 +1,26 @@
 <template>
-<problem-main-question
-	:prompt="prompt"
-	:submitted-answers="submittedAnswers"
-	@submit="handleSubmit($event)"
-/>
+<v-container>
+	<v-row>
+		<!-- Main Problem Body -->
+		<v-col>
+			<problem-main-question
+				:is-current-step="$store.getters.stepLevel === 0"
+				:prompt="prompt"
+				:submitted-answers="submittedAnswers"
+				@submit="handleSubmit($event)"
+			/>
+		</v-col>
+		<v-col v-if="$store.getters.stepLevel > 0">
+			BUTTS
+		</v-col>
+	</v-row>
+	<problem-main-question
+		v-if="$store.getters.stepLevel > 0"
+		:is-current-step="true"
+		:prompt="$store.getters.currentStep.propmt"
+		:submitted-answers="submittedAnswers"
+	/>
+</v-container>
 	
 </template>
 
