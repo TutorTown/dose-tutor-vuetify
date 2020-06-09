@@ -32,6 +32,7 @@ export default class Step {
 					res.match = this.correctAnswer;
 					res.message = this.correctAnswer.message;
 					this.submittedAnswers.push(new Answer({value: guess, correct: true, message: res.message}));
+					this.complete = true;
 				// Check guess against common wrong answers
 				} else {
 					this.commonWrongAnswers.forEach((answer) => {
@@ -40,10 +41,14 @@ export default class Step {
 							res.message = answer.message;
 						}
 					});
-					this.submittedAnswers.push(new Answer({value: guess, correct: false, message: res.message}));
+					// this.submittedAnswers.push(new Answer({value: guess, correct: false, message: res.message}));
+					this.submittedAnswers.push(this.correctAnswer);
 				}
-				return res;
+			} else {
+				res.correct = true;
+				res.message = `You have completed this step with the correct answer ${this.correctAnswer.value}`;	
 			}
+			return res;
 		} // End checkAnswer()
 
 	} // End constructor()
