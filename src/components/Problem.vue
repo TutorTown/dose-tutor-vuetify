@@ -19,7 +19,7 @@
 		v-if="$store.getters.stepLevel > 0"
 		:is-current-step="true"
 		:is-main-question="false"
-		:prompt="$store.getters.currentStep.propmt"
+		:prompt="$store.getters.currentStep.prompt"
 		:submitted-answers="submittedAnswers"
 	/>
 </v-container>
