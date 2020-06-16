@@ -1,6 +1,6 @@
 <template>
 	<div id="step_wrapper">
-		<v-card>
+		<v-card class="step_card">
 			<v-card-title>{{isMainQuestion ? 'Main Question' : 'Current Step'}}</v-card-title>
 
 			<v-card-text> {{ prompt }} </v-card-text>
@@ -47,7 +47,12 @@ export default {
 </script>
 
 <style type="scss" scoped>
-
+	#step_wrapper {
+	height: 100%;
+}
+.step_card {
+	height: 100%;
+}
 .v-card__actions {
 	display: flex;
 	position: relative;

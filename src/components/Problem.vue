@@ -7,12 +7,16 @@
 				:is-current-step="$store.getters.stepLevel === 0"
 				:is-main-question="true"
 				:prompt="prompt"
+				flex--grow--1
 				:submitted-answers="submittedAnswers"
 				@submit="handleSubmit($event)"
 			/>
 		</v-col>
 		<v-col v-if="$store.getters.stepLevel > 0">
-			BUTTS
+			<problem-stepper
+				:sub-stepper="false"
+				:steps="$store.state.currentProblem.problem.mainStep.subSteps"
+			/>
 		</v-col>
 	</v-row>
 	<problem-step
@@ -27,12 +31,14 @@
 </template>
 
 <script type="text/javascript">
-import ProblemStep from './ProblemStep.vue'
+import ProblemStep from './ProblemStep.vue';
+import ProblemStepper from './ProblemStepper.vue';
 
 export default {
 	name: 'Problem',
 	components: {
 		ProblemStep,
+		ProblemStepper,
 	},
 	props: {
 
@@ -65,5 +71,5 @@ export default {
 </script>
 
 <style type="scss" scoped>
-	
+
 </style>
